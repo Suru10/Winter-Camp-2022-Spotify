@@ -26,7 +26,7 @@ for i in colnames:
 st.header('Data Cleaning')
 st.write('Here, upon reviewing the value counts and determining how valuable certain features would be compared to others, it was decided that artist type, and year released would be dropped. Artist type didnt quite matter as compare to artist, and year released is mostly same as top year')
 
-df = df.dropna(axis=0)
+df = df.dropna(axis=0).reset_index(drop=True)
 
 
 st.header('Exploring Correlation')

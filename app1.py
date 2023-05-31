@@ -60,18 +60,18 @@ st.plotly_chart(fig)
 
 
 def topgenre_year(data):
-    year_genre = pd.DataFrame()
-    for i in range(2010,2020):
-        column = df[df["top year"] == i]
+    year_genre_df = pd.DataFrame()  # Use a different variable name here
+    for i in range(2010, 2020):
+        column = data[data["top year"] == i]
         column = column.groupby('top genre')['top genre'].count().sort_values(ascending=False)
         column = column[:2]
-        year_genre = year_genre.append(column)
-    return year_genre
-topgenre_year = topgenre_year(df)
+        pd.concat([year_genre_df, column], axis=0)
+    return year_genre_df
+topgenre_year_df = topgenre_year(df)
 l = [*range(2010,2020)]
-topgenre_year["year"] = l
+topgenre_year_df["year"] = l
 st.write('This are top Genre ')
-fig = px.bar(topgenre_year, x = "year", y = ['dance pop', 'atl hip hop', 'contemporary country',
+fig = px.bar(topgenre_year_df, x = "year", y = ['dance pop', 'atl hip hop', 'contemporary country',
                                              'art pop', 'pop','edm', 'alt z'])
 st.plotly_chart(fig)
 

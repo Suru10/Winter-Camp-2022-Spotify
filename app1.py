@@ -30,7 +30,8 @@ df = df.dropna(axis=0).reset_index(drop=True)
 
 
 st.header('Exploring Correlation')
-df_corr = df.corr() # Generate correlation matrix
+numeric_columns = df.select_dtypes(include=np.number).columns
+df_corr = df[numeric_columns].corr()
 x = list(df_corr.columns)
 y = list(df_corr.index)
 z = np.array(df_corr)
